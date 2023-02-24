@@ -1,0 +1,1 @@
+echo "This tool is to fully install all necessary tools for a linux system to operate. This assumes you have a standard system package manager (apt, dnf, or pacman), and an internet connection. I might make one that installs from source."
