@@ -53,6 +53,18 @@ elif [ "$YN" = "Y" ]; then
             INSTALLCMD="pacman -S"
             ;;
     esac
+    
+    ase "$SYSTEM_TYPE" in
+        debian)
+            UPDATECMD="apt update -y"
+            ;;
+        fedora)
+            UPDATECMD="dnf update -y"
+            ;;
+        arch)
+            UPDATECMD="pacman -Syu"
+            ;;
+    esac
 
     # Handle desktop environment installations
     if [ "$INSTALLTYPE" = "5" ] || [ "$INSTALLTYPE" = "6" ]; then
@@ -85,6 +97,7 @@ elif ["$INSTALLTYPE" = "6"]; then
 ["$INSTALLTYPE" = $FULLDE]
 
 fi
-    # Run the installation command with sudo
+    # Run the installation and update commands with sudo
+    sudo $UPDATECOMMAND
     sudo $INSTALLCMD $INSTALLTYPE
 fi
