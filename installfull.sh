@@ -4,7 +4,7 @@ echo "This tool is to fully install all necessary tools for a Linux system to op
 
 # Prompt the user to confirm whether they want to continue
 echo "Do you wish to continue? Y/N"
-read YN
+read -r YN
 
 # Use an if statement to check the user's response
 if [ "$YN" = "N" ]; then
@@ -31,7 +31,7 @@ elif [ "$YN" = "Y" ]; then
 
     # Prompt the user to select an installation type
     echo "Do you want an upgraded terminal, basic window manager, advanced window manager, basic desktop environment, or full desktop environment? 1/2/3/4/5"
-    read INSTALLTYPE
+    read -r INSTALLTYPE
 
     # Assign the package list based on the installation type
     case "$INSTALLTYPE" in
