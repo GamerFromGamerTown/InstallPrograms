@@ -57,9 +57,19 @@ elif [ "$YN" = "Y" ]; then
         echo "Invalid option"
         exit
     fi
-
+case "$SYSTEM_TYPE" in
+        debian)
+            UPDATECMD="apt update -y"
+            ;;
+        fedora)
+            UPDATECMD="dnf update -y"
+            ;;
+        arch)
+            UPDATECMD="pacman -Syu"
+            ;;
+    esac
 
     # Run the installation and update commands with sudo
-    sudo $UPDATECOMMAND
-    sudo $INSTALLCMD $INSTALLTYPE
+    sudo $UPDATECMD -y
+    sudo $INSTALLCMD $INSTALLTYPE -y
 fi
