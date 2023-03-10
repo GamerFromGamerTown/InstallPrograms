@@ -39,16 +39,16 @@ elif [ "$YN" = "Y" ]; then
             PACKAGES="htop nano neovim nmon nmtui py ipconfig clamav"
             ;;
         2)
-            PACKAGES="htop nano neovim nmon nmtui py ipconfig openbox* obconf clamav alacritty xterm wallch"
+            PACKAGES="htop nano neovim nmon nmtui py ipconfig openbox* obconf clamav alacritty xterm wallch nitroget"
             ;;
         3)
-            PACKAGES="htop nano neovim nmon nmtui py ipconfig openbox* obconf clamav firefox alacritty xterm nemo* wallch flameshot"
+            PACKAGES="htop nano neovim nmon nmtui py ipconfig openbox* obconf clamav firefox alacritty xterm nemo* wallch flameshot nitrogen tint2 feh p7zip-full"
             ;;
         4)
-            PACKAGES="htop nano neovim nmon nmtui py ipconfig openbox* obconf clamav firefox alacritty xterm nemo* wallch flameshot gimp kbackup libreoffice bleachbit vlc cheese wine kdenlive"
+            PACKAGES="htop nano neovim nmon nmtui py ipconfig openbox* obconf nitrogen clamav firefox alacritty xterm nemo* wallch flameshot tint2 feh rofi gimp p7zip-full kbackup libreoffice bleachbit vlc cheese wine kdenlive"
             ;;
         5)
-            PACKAGES="htop nano neovim nmon nmtui py ipconfig clamav firefox alacritty xterm nemo* wallch flameshot kbackup libreoffice bleachbit vlc cheese"
+            PACKAGES="htop nano neovim nmon nmtui py ipconfig clamav firefox alacritty xterm nemo* wallch flameshot kbackup libreoffice bleachbit vlc feh cheese p7zip-full"
             ;;
         6)
             PACKAGES="htop nano neovim nmon nmtui py ipconfig clamav firefox alacritty xterm nemo* wallch flameshot gimp kbackup libre bleachbit vlc cheese wine kdenlive"
