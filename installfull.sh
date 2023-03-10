@@ -4,10 +4,9 @@ TUI="htop nano neovim nmon nmtui py ipconfig clamav"
 BASICWM="htop nano neovim nmon nmtui py ipconfig openbox* obconf clamav alacritty xterm wallch"
 ADVANCEDWM="htop nano neovim nmon nmtui py ipconfig openbox* obconf clamav firefox alacritty xterm nemo* wallch flameshot"
 FULLWM="htop nano neovim nmon nmtui py ipconfig openbox* obconf clamav firefox alacritty xterm nemo* wallch flameshot gimp kbackup libreoffice bleachbit vlc cheese wine kdenlive"
-BASICDE="htop nano neovim nmon nmtui py ipconfig $DE obconf clamav firefox alacritty xterm nemo* wallch flameshot kbackup libreoffice bleachbit vlc cheese"
-FULLDE="htop nano neovim nmon nmtui py ipconfig $DE obconf clamav firefox alacritty xterm nemo* wallch flameshot gimp kbackup libre bleachbit vlc cheese wine kdenlive"
+BASICDE="htop nano neovim nmon nmtui py ipconfig clamav firefox alacritty xterm nemo* wallch flameshot kbackup libreoffice bleachbit vlc cheese"
+FULLDE="htop nano neovim nmon nmtui py ipconfig clamav firefox alacritty xterm nemo* wallch flameshot gimp kbackup libre bleachbit vlc cheese wine kdenlive"
 
-#!/bin/bash
 echo "This tool is to fully install all necessary tools for a Linux system to operate. This assumes you have a standard system package manager (apt, dnf, or pacman), and an internet connection. I might make one that installs from source."
 
 # Prompt the user to confirm whether they want to continue
@@ -41,62 +40,25 @@ elif [ "$YN" = "Y" ]; then
     echo "Do you want an upgraded terminal, basic window manager, advanced window manager, basic desktop environment, or full desktop environment? 1/2/3/4/5"
     read INSTALLTYPE
 
-    # Use a case statement to set the installation command based on the system type and installation type
-    case "$SYSTEM_TYPE" in
-        debian)
-            INSTALLCMD="apt install"
-            ;;
-        fedora)
-            INSTALLCMD="dnf install"
-            ;;
-        arch)
-            INSTALLCMD="pacman -S"
-            ;;
-    esac
-    
-    ase "$SYSTEM_TYPE" in
-        debian)
-            UPDATECMD="apt update -y"
-            ;;
-        fedora)
-            UPDATECMD="dnf update -y"
-            ;;
-        arch)
-            UPDATECMD="pacman -Syu"
-            ;;
-    esac
-
-    # Handle desktop environment installations
-    if [ "$INSTALLTYPE" = "5" ] || [ "$INSTALLTYPE" = "6" ]; then
-        echo "What desktop environment would you like? Input the name in lowercase if you think it is in your package manager, if not; you'll have to compile it. 1/2/3/4/5"
-        read DE
-        # Add the DE name to the installation command
-        INSTALLCMD="$INSTALLCMD $DE"
+    # Assign the package list based on the installation type
+    if [ "$INSTALLTYPE" = "1" ]; then
+        PACKAGES=$TUI
+    elif [ "$INSTALLTYPE" = "2" ]; then
+        PACKAGES=$BASICWM
+    elif [ "$INSTALLTYPE" = "3" ]; then
+        PACKAGES=$ADVANCEDWM
+    elif [ "$INSTALLTYPE" = "4" ]; then
+        PACKAGES=$FULLWM
+    elif [ "$INSTALLTYPE" = "5" ]; then
+        PACKAGES=$BASICDE
+    elif [ "$INSTALLTYPE" = "6" ]; then
+        PACKAGES=$FULLDE
+    else
+        echo "Invalid option"
+        exit
     fi
 
-if ["$INSTALLTYPE" = "1"]; then
-["$INSTALLTYPE" = $TUI]
 
-elif ["$INSTALLTYPE" = "2"]; then
-["$INSTALLTYPE" = $BASICWM]
-
-
-elif ["$INSTALLTYPE" = "3"]; then
-["$INSTALLTYPE" = $ADVANCEDWM]
-
-
-elif ["$INSTALLTYPE" = "4"]; then
-["$INSTALLTYPE" = $FULLWM]
-
-
-elif ["$INSTALLTYPE" = "5"]; then
-["$INSTALLTYPE" = $BASICDE]
-
-
-elif ["$INSTALLTYPE" = "6"]; then
-["$INSTALLTYPE" = $FULLDE]
-
-fi
     # Run the installation and update commands with sudo
     sudo $UPDATECOMMAND
     sudo $INSTALLCMD $INSTALLTYPE
