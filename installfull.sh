@@ -1,12 +1,5 @@
 #!/bin/bash
 
-TUI="htop nano neovim nmon nmtui py ipconfig clamav"
-BASICWM="htop nano neovim nmon nmtui py ipconfig openbox* obconf clamav alacritty xterm wallch"
-ADVANCEDWM="htop nano neovim nmon nmtui py ipconfig openbox* obconf clamav firefox alacritty xterm nemo* wallch flameshot"
-FULLWM="htop nano neovim nmon nmtui py ipconfig openbox* obconf clamav firefox alacritty xterm nemo* wallch flameshot gimp kbackup libreoffice bleachbit vlc cheese wine kdenlive"
-BASICDE="htop nano neovim nmon nmtui py ipconfig clamav firefox alacritty xterm nemo* wallch flameshot kbackup libreoffice bleachbit vlc cheese"
-FULLDE="htop nano neovim nmon nmtui py ipconfig clamav firefox alacritty xterm nemo* wallch flameshot gimp kbackup libre bleachbit vlc cheese wine kdenlive"
-
 echo "This tool is to fully install all necessary tools for a Linux system to operate. This assumes you have a standard system package manager (apt, dnf, or pacman), and an internet connection. I might make one that installs from source."
 
 # Prompt the user to confirm whether they want to continue
@@ -41,35 +34,50 @@ elif [ "$YN" = "Y" ]; then
     read INSTALLTYPE
 
     # Assign the package list based on the installation type
-    if [ "$INSTALLTYPE" = "1" ]; then
-        PACKAGES=$TUI
-    elif [ "$INSTALLTYPE" = "2" ]; then
-        PACKAGES=$BASICWM
-    elif [ "$INSTALLTYPE" = "3" ]; then
-        PACKAGES=$ADVANCEDWM
-    elif [ "$INSTALLTYPE" = "4" ]; then
-        PACKAGES=$FULLWM
-    elif [ "$INSTALLTYPE" = "5" ]; then
-        PACKAGES=$BASICDE
-    elif [ "$INSTALLTYPE" = "6" ]; then
-        PACKAGES=$FULLDE
-    else
-        echo "Invalid option"
-        exit
-    fi
-case "$SYSTEM_TYPE" in
+    case "$INSTALLTYPE" in
+        1)
+            PACKAGES="htop nano neovim nmon nmtui py ipconfig clamav"
+            ;;
+        2)
+            PACKAGES="htop nano neovim nmon nmtui py ipconfig openbox* obconf clamav alacritty xterm wallch"
+            ;;
+        3)
+            PACKAGES="htop nano neovim nmon nmtui py ipconfig openbox* obconf clamav firefox alacritty xterm nemo* wallch flameshot"
+            ;;
+        4)
+            PACKAGES="htop nano neovim nmon nmtui py ipconfig openbox* obconf clamav firefox alacritty xterm nemo* wallch flameshot gimp kbackup libreoffice bleachbit vlc cheese wine kdenlive"
+            ;;
+        5)
+            PACKAGES="htop nano neovim nmon nmtui py ipconfig clamav firefox alacritty xterm nemo* wallch flameshot kbackup libreoffice bleachbit vlc cheese"
+            ;;
+        6)
+            PACKAGES="htop nano neovim nmon nmtui py ipconfig clamav firefox alacritty xterm nemo* wallch flameshot gimp kbackup libre bleachbit vlc cheese wine kdenlive"
+            ;;
+        *)
+            echo "Invalid option"
+            exit
+            ;;
+    esac
+
+    case "$SYSTEM_TYPE" in
         debian)
             UPDATECMD="apt update -y"
+            INSTALLCMD="apt install"
             ;;
         fedora)
             UPDATECMD="dnf update -y"
+            INSTALLCMD="dnf install"
             ;;
         arch)
-            UPDATECMD="pacman -Syu"
+            UPDATECMD="pacman -Syu -y"
+            INSTALLCMD="pacman -S"
             ;;
     esac
 
     # Run the installation and update commands with sudo
-    sudo $UPDATECMD -y
-    sudo $INSTALLCMD $INSTALLTYPE -y
+    sudo $UPDATECMD
+    sudo $INSTALLCMD $PACKAGES -y
+
+
+-y
 fi
