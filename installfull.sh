@@ -63,7 +63,9 @@ esac
 
     case "$SYSTEM_TYPE" in
         debian)
-            UPDATECMD="apt update -y"
+            UPDATECMD="apt update -y
+                apt-get install software-properties-common
+                add-apt-repository universe"
             INSTALLCMD="apt install"
             ;;
         fedora)
