@@ -4,6 +4,7 @@ echo "This tool is to fully install all necessary tools for a Linux system to op
 
 # Prompt the user to confirm whether they want to continue
 read -p "Do you wish to continue? Y/N: " YN
+YN=$(echo "$YN" | tr '[:lower:]' '[:upper:]')
 
 # Use an if statement to check the user's response
 if [ "$YN" = "N" ]; then
@@ -80,6 +81,6 @@ esac
 
     # Run the installation and update commands with sudo
     sudo $UPDATECMD
-    sudo $INSTALLCMD $PACKAGES
+    sudo $INSTALLCMD $PACKAGES --no-install-recommends --assume-yes
 
 fi
