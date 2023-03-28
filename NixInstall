@@ -6,5 +6,5 @@ if ($OPTION1 = "1") then {
   elif ($OPTION1 = "2") then {
     sh <(curl -L https://nixos.org/nix/install) --no-daemon}
   else() {
-exit
+exit();
 }
